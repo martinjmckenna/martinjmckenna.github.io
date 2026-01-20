@@ -1,0 +1,18 @@
+title: Martin McKenna
+description: Personal blog
+url: "https://martinjmckenna.github.io"
+baseurl: ""
+
+permalink: /:title/
+
+paginate: 5
+paginate_path: "/page/:num/"
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+
+{% capture intro %}{% include_relative _intro.md %}{% endcapture %}
+<div class="intro">
+  {{ intro | markdownify }}
+</div>
+
+<ul class="posts">
+  {% for post in paginator.posts %}
+  <li>
+    <span class="post-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p>{{ post.excerpt | strip_html | truncate: 200 }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
+{% include pagination.html %}
