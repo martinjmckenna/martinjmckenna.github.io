@@ -3,7 +3,7 @@ description: Personal blog
 url: "https://martinjmckenna.github.io"
 baseurl: ""
 
-permalink: /:title/
+permalink: /:year/:month/:title/
 
 paginate: 5
 paginate_path: "/page/:num/"

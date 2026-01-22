@@ -1,6 +1,6 @@
 :root {
-  --bg-color: #ffffff;
-  --text-color: #1a1a1a;
+  --bg-color: #fffff8;
+  --text-color: #111111;
   --link-color: #0066cc;
   --link-hover: #004499;
   --border-color: #e0e0e0;
@@ -10,8 +10,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #1a1a1a;
-    --text-color: #e0e0e0;
+    --bg-color: #111111;
+    --text-color: #fffff8;
     --link-color: #6db3f2;
     --link-hover: #9dcbf5;
     --border-color: #333333;
@@ -72,6 +72,20 @@ p {
   margin-bottom: 1rem;
 }
 
+ul, ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li > ul, li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 header {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -126,6 +140,23 @@ article header h1 {
 article img {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+figure {
+  margin: 1.5rem 0;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted-color);
 }
 
 pre, code {
@@ -210,4 +241,24 @@ footer {
   border-top: 1px solid var(--border-color);
   color: var(--muted-color);
   font-size: 0.9rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 1rem 1rem 1rem 0;
+}
+
+th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+}
+
+td {
+  border-bottom: 1px solid var(--border-color);
 }
