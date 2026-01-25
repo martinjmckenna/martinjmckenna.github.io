@@ -112,6 +112,7 @@ header h1 a:hover {
 
 .posts {
   list-style: none;
+  padding-left: 0;
 }
 
 .posts li {
@@ -121,6 +122,12 @@ header h1 a:hover {
 .post-date {
   color: var(--muted-color);
   font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.posts h2 {
+  margin-top: 0;
 }
 
 article {
