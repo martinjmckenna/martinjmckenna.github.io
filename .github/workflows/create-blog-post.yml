@@ -1,0 +1,49 @@
+name: Create Blog Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_content:
+        description: 'Full post markdown (frontmatter + content)'
+        required: true
+        type: string
+
+jobs:
+  create_post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse frontmatter and create post
+        run: |
+          # Write the input to a temp file
+          cat > /tmp/post.md << 'ENDOFPOST'
+          ${{ github.event.inputs.post_content }}
+          ENDOFPOST
+
+          # Extract title from frontmatter (remove quotes if present)
+          TITLE=$(grep -m1 '^title:' /tmp/post.md | sed 's/^title:[[:space:]]*//' | sed 's/^["'"'"']//' | sed 's/["'"'"']$//')
+
+          # Extract date from frontmatter
+          DATE=$(grep -m1 '^date:' /tmp/post.md | sed 's/^date:[[:space:]]*//')
+
+          # Convert title to kebab-case filename
+          FILENAME=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//' | sed 's/-$//')
+
+          # Create the post file
+          cp /tmp/post.md "_posts/${DATE}-${FILENAME}.md"
+
+          # Export for commit message
+          echo "POST_TITLE=$TITLE" >> $GITHUB_ENV
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _posts/
+          git commit -m "Add post: $POST_TITLE"
+          git push
